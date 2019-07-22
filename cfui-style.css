@@ -1,0 +1,365 @@
+@charset "utf-8";
+.cf-accordion {
+	
+}
+.cf-accordion > h3 {
+	color: #666;
+	background: #EFEFEF;
+	padding: 5px;
+	border-top: solid #333 1px;
+	border-left: solid #333 1px;
+	border-right: solid #333 1px;
+	margin: 0;
+}
+.cf-accordion > h3:after {
+	content: "+";
+	float: right;
+	color: #666;
+	display: inline-block;
+	line-height: 1em;
+	margin: 0 5px 0 0;
+}
+.cf-accordion > h3.opentab:after {
+	content: "-";
+	float: right;
+	color: #666;
+	display: inline-block;
+	line-height: 1em;
+	margin: 0 5px 0 0;
+}
+.cf-accordion > div {
+	background: #FFF;
+	padding: 0px 5px 0px 5px;
+	border-left: solid #666 1px;
+	border-bottom: solid #666 1px;
+	border-right: solid #666 1px;
+	color: #666;
+	overflow: hidden;
+	display: block;
+	height: auto;
+	-webkit-transition: height 0.5s ease-out;
+	-moz-transition: height 0.5s ease-out;
+	-o-transition: height 0.5s ease-out;
+	transition: height 0.5s ease-out;
+    margin-bottom: -1px;
+}
+.cf-modal {
+    background: #FFF;
+    border: solid #CCC 1px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -webkit-border-radius: 3px;
+	border-radius: 3px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    padding: 50px 10px 10px 10px;
+    top: 20px;
+    left: 0;
+    z-index: 2;
+}
+#cf-modal-close-btn {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+    top: 7px;
+    right: 10px;
+    cursor: pointer;
+}
+#cf-modal-close-btn:after {
+    content: "+";
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    color: #111;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    display: block;
+    font-size: 30px;
+    line-height: 1em;
+    z-index: 3;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+#cf-modal-close-btn:hover:after {
+    color: #FF0099;
+}
+#cf-modal-screen-overlay {
+    background: #000;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    display: none;
+    z-index: 1;
+    opacity: 0.85;
+    filter: alpha(opacity=85);
+	overflow: hidden;
+	height: 100%;
+}
+#dwin {
+    width: 400px;
+    height: 200px;
+    background: #333;
+    padding: 10px;
+    color: #CCC;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    line-height: 1.1em;
+    border: solid #000 1px;
+    overflow-y: scroll;
+    display: block;
+}
+.cf-modal > .modal-header {
+    width: 100%;
+    height: 30px;
+    background: #666;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    color: #FFF;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    text-align: center;
+    padding: 8px 0 0 0;
+    z-index: 1;
+    display: block;
+    margin: 0 0 20px 0;
+}
+.cf-tabs {
+    width: 100%;
+    display: block;
+    position: relative;
+}
+.cf-tabs .cf-tab-header {
+    position: relative;
+    width: 100%;
+}
+.cf-tabs .cf-tab-header > div {
+    width: auto;
+    padding: 10px;
+    text-align: center;
+    margin: 0px -2px -1px 0px;
+    display: inline-block;
+    vertical-align: bottom;
+    border-left: solid #CCC thin;
+    border-top: solid #CCC thin;
+    border-right: solid #CCC thin;
+    border-radius: 5px;
+}
+.cf-tab-header > div.active {
+    background: #666;
+}
+.cf-tab-header > div > h5 {
+    font-size: 16px;
+    color: #333;
+    margin: 0;
+    line-height: 1.1em;
+    pointer-events: none;
+}
+.cf-tab-header > div.active > h5 {
+    color: #FFF;
+}
+.cf-tabs .cf-tab-content {
+    border: solid #CCC thin;
+    display: block;
+    position: relative;
+    height: 0px;
+    margin-top: -2px;
+    padding: 10px;
+    background: #FFF;
+    overflow: hidden;
+}
+.cf-tabs .cf-tab-content > div {
+    position: absolute;
+    z-index: 0;
+    background: #FFF;
+    height: auto;
+    width: 98%;
+    display: block;
+    padding: 0px;
+    overflow: hidden;
+}
+.cf-tabs .cf-tab-content > div.active {
+    z-index: 1;
+    overflow: hidden;
+}
+.cf-slideshow {
+    width: 500px;
+    height: 300px;
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
+.cf-slideshow > section {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    z-index: 0;
+    background: #CCC;
+}
+.cf-slideshow > section.active {
+    z-index: 2;
+}
+.cf-slideshow > .nextBtn, .cf-slideshow > .backBtn {
+    width: 50px;
+    height: 50px;
+    background: #000;
+    position: absolute;
+    right: 0px;
+    top: 40%;
+    display: block;
+    cursor: pointer;
+    z-index: 3;
+    transition: background 0.4s ease-in;
+}
+.cf-slideshow > .backBtn {
+    left: 0px;
+}
+.cf-slideshow > .nextBtn:after {
+    content: '❯';
+    width: inherit;
+    font-size: 2em;
+    color: #FFF;
+    position: absolute;
+    display: block;
+    text-align: center;
+    margin-left: 0px;
+    transition: all 0.4s ease-out;
+    -webkit-transition: all 0.4s ease-out;
+}
+.cf-slideshow > .backBtn:after {
+    content: '❮';
+    width: inherit;
+    font-size: 2em;
+    color: #FFF;
+    position: absolute;
+    display: block;
+    text-align: center;
+    margin-left: 0px;
+    transition: all 0.4s ease-out;
+    -webkit-transition: all 0.4s ease-out;
+}
+.cf-slideshow > .backBtn.disabled, .cf-slideshow > .nextBtn.disabled {
+    display: none;
+}
+.cf-slideshow > .backBtn:hover, .cf-slideshow > .nextBtn:hover {
+    background: #FF0099;
+}
+.cf-slideshow > .backBtn:hover:after {
+    margin-left: -5px;
+}
+.cf-slideshow > .nextBtn:hover:after {
+    margin-left: 5px;
+}
+.cf-slideshow > .thumbnails {
+    position: absolute;
+    z-index: 4;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+.thumbnails .thumb {
+    width: 50px;
+    height: 50px;
+    background: #FF0099;
+    display: inline-block;
+    margin: 0 2% 2% 0;
+    -webkit-transform: scale(1, 1);
+    -moz-transform: scale(1, 1);
+    -o-transform: scale(1, 1);
+    transform: scale(1, 1);
+    -webkit-transition: transform 0.4s ease-out, background 0.4s ease-out;
+    -moz-transition: transform 0.4s ease-out, background 0.4s ease-out;
+    -o-transition: transform 0.4s ease-out, background 0.4s ease-out;
+    transition: transform 0.4s ease-out, background 0.4s ease-out;
+    overflow: hidden;
+    padding: 0px;
+    cursor: pointer;
+    border: solid #CCC thin;
+}
+.thumbnails .thumb.active {
+    background: #000;
+    transform: scale(1.2, 1.2);
+}
+.thumb > .thumb-preview {
+    transform: scale(0.2, 0.2);
+    transform-origin: top left;
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    left: 0px;
+    top: 0px;
+    pointer-events: none;
+}
+.thumbnails .thumb:hover {
+    border-width: 2px;
+}
+/* Tooltips */
+.tooltip-link {
+    position: relative;
+    color: #ff0099;
+}
+.tooltip-link > .tooltip {
+    position: absolute;
+    background: #CCC;
+    padding: 5px;
+    width: 180px;
+    left: 100%;
+    top: -5px;
+    color: #000;
+    margin-left: 10px;
+    display: none;
+    z-index: 5;
+}
+.tooltip-link > .tooltip:before {
+    content: '◀';
+    width: 10px;
+    position: absolute;
+    left: -7px;
+    color: #CCC;
+    height: 10px;
+    top: 10px;
+    display: block;
+    font-size: 10px;
+}
+.tooltip-link > .tooltip.left {
+    margin-left: 0px;
+    z-index: 0;
+}
+.tooltip-link > .tooltip.left:before {
+    content: '▶';
+    left: auto;
+    right: -9px;
+}
+.tooltip-link > .tooltip.above:before {
+    content: '▶';
+    left: 45%;
+    right: auto;
+    top: 99%;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+.tooltip-link > .tooltip.below {
+    margin-top: 10px;
+    margin-left: 0px;
+}
+.tooltip-link > .tooltip.below:before {
+    content: '▶';
+    left: 45%;
+    right: auto;
+    top: -9px;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
