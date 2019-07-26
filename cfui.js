@@ -1137,6 +1137,117 @@ CFTooltip.prototype.init = function() {
         }
     }, false);
 };
+var CFAutoComplete = function(id, options) {
+    this.elem = null;
+    this.currentFocus = 0;
+    this.id = id;
+    var presetValues = {
+        source: ['You must provide an array']
+    }
+    this.options =  {
+        source: options.source
+    }
+    for (var opt in this.options) {
+        if (this.options[opt] === undefined) {
+            this.options[opt] = presetValues[opt];
+        }
+    }
+    this.init();
+};
+CFAutoComplete.prototype.init = function() {
+    var that = this;
+    this.elem = document.getElementById(this.id);
+    var inputPosition = this.elem.getBoundingClientRect();
+    var inputHeight = this.elem.offsetHeight;
+    this.elem.addEventListener('input', function() {
+        var a, b, i, val = this.value;
+        that.closeAllLists();
+        if (!val) {
+            return false;
+        }
+        that.currentFocus = -1;
+        a = document.createElement('div');
+        a.setAttribute('id', this.id + '_list');
+        a.setAttribute('class', 'cf-autocomplete-list');
+        a.style.top = Math.floor(inputPosition.y + inputHeight) + 'px';
+        a.style.left = Math.floor(inputPosition.x) + 'px';
+        this.parentNode.appendChild(a);
+        for (i = 0; i < that.options.source.length; i++) {
+            if (that.options.source[i].substr(0, val.length).toUpperCase() === val.toUpperCase()) {
+                b = document.createElement('div');
+                b.innerHTML = '<span>' + that.options.source[i].substr(0, that.options.source[i].length) + '</span>';
+                b.innerHtml += that.options.source[i].substr(val.length);
+                b.innerHTML += '<input type="hidden" value="' + that.options.source[i] + '" />';
+                b.addEventListener('click', function() {
+                    that.elem.value = this.getElementsByTagName('input')[0].value;
+                    that.elem.focus();
+                    that.closeAllLists();
+                });
+                a.appendChild(b);
+            }
+        }
+    });
+    this.elem.addEventListener('keydown', function(event) {
+        var x = document.getElementById(this.id + '_list');
+        if (x) {
+            x = x.getElementsByTagName('div');
+        }
+        if (event.keyCode === 40) {
+            that.currentFocus++;
+            that.addActive(x);
+        } else if (event.keyCode === 38) {
+            that.currentFocus--;
+            that.addActive(x);
+        } else if (event.keyCode === 13) {
+            event.preventDefault();
+            if (that.currentFocus > -1) {
+                if (x) {
+                    x[that.currentFocus].click();
+                }
+            }
+        }
+    });
+    document.addEventListener('click', function(event) {
+        that.closeAllLists(event.target);
+    });
+};
+CFAutoComplete.prototype.addActive = function(x) {
+    if (!x) {
+        return(false);
+    }
+    this.removeActive(x);
+    console.log(x[this.currentFocus]);
+    if (this.currentFocus >= x.length) {
+        this.currentFocus = 0;
+    }
+    if (this.currentFocus < 0) {
+        this.currentFocus = (x.length - 1);
+    }
+    x[this.currentFocus].classList.add('active');
+};
+CFAutoComplete.prototype.removeActive = function(x) {
+    for (var i = 0; i < x.length; i++) {
+        x[i].classList.remove('active');
+    }
+};
+CFAutoComplete.prototype.closeAllLists = function(elem) {
+    var x = document.getElementsByClassName('cf-autocomplete-list');
+    for (var i = 0; i < x.length; i++) {
+        if (elem !== x[i] && elem !== this.elem) {
+            x[i].parentNode.removeChild(x[i]);
+        }
+    }
+};
+CFAutoComplete.prototype.getList = function(id) {
+    var elem = document.getElementById(id);
+    var items = elem.getElementsByTagName('li');
+    var list = [];
+    for (var i = 0; i < items.length; i++) {
+        var val = items[i].innerHTML;
+        list.push(val);
+    }
+    this.options.source = list;
+};
 (function() {
     var tooltips = document.getElementsByClassName('tooltip');
     if (tooltips.length > -1) {
