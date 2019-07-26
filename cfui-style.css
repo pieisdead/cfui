@@ -363,3 +363,35 @@
     -ms-transform: rotate(-90deg);
     transform: rotate(-90deg);
 }
+.cf-autocomplete {
+	position: relative;
+	display: inline-block;
+	font-size: 14px;
+	line-height: 14px;
+	color: #090909;
+}
+.cf-autocomplete span {
+	font-size: 14px;
+}
+.cf-autocomplete-list {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    z-index: 99;
+    top: 80%;
+    left: 0;
+    right: 0;
+    width: 200px;
+}
+.cf-autocomplete-list div {
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+.cf-autocomplete-list div:hover {
+    background-color: #D3D3D3;
+}
+.cf-autocomplete div.active {
+    background-color: #666;
+    color: #FFFFFF;
+}
