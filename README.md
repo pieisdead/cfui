@@ -5,4 +5,7 @@ Javascript user interface widgets. Visit www.multisites.co.za/cfjs for implement
 # Widgets currently available
 Accordions, Autocomplete fields, Modal dialogs, Slideshows, Tabs and Tooltips.
 
+# Effects
+Fade, grow, spin, highlite
+
 More widgets and functions are in development.
