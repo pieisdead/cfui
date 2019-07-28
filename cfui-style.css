@@ -395,3 +395,24 @@
     background-color: #666;
     color: #FFFFFF;
 }
+/* Effects */
+.cf-effect {
+    display: block;
+    border: solid #666 thin;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+.cf-effect.fade {
+    opacity: 0;
+}
+.cf-effect .highlite {
+    background: #F5F87A;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+    display: block;
+}
