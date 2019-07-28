@@ -1248,6 +1248,81 @@ CFAutoComplete.prototype.getList = function(id) {
     }
     this.options.source = list;
 };
+var CFEffect = function(id, options) {
+    this.elem = document.getElementById(id);
+    this.options = {
+        length: options.length
+    };
+};
+CFEffect.prototype.addEffect = function(type) {
+    var that = this;
+    switch (type) {
+        case 'fade':
+            this.elem.style.opacity = 0;
+            var i = 0;
+            var fadeTimer = setInterval(function() {
+                i++;
+                that.elem.style.opacity = i / 100;
+                if (i >= 100) {
+                    clearInterval(fadeTimer);
+                }
+            }, that.options.length * 10);
+            break;
+        case 'grow':
+            this.elem.style.transform = 'scale(0)';
+            var j = 0;
+            var growTimer = setInterval(function() {
+                j++;
+                that.elem.style.transform = 'scale(' + (j / 100) + ')';
+                if (j >= 100) {
+                    clearInterval(growTimer);
+                }
+            }, that.options.length * 10);
+            break;
+        case 'spin':
+            var k = 0;
+            var spinTimer = setInterval(function() {
+                k++;
+                var deg = k / 100 * 360;
+                that.elem.style.transform = 'rotate(' + deg + 'deg)';
+                if (k >= 100) {
+                    clearInterval(spinTimer);
+                }
+            }, that.options.length * 10);
+            break;
+        case 'highlite':
+            var l = 0;
+            var hilite = document.createElement('div');
+            hilite.setAttribute('class', 'highlite');
+            this.elem.appendChild(hilite);
+            hilite.style.opacity = 0;
+            var reverse = false;
+            var elwidth = this.elem.offsetWidth;
+            var elheight = this.elem.offsetHeight;
+            hilite.style.width = elwidth + 'px';
+            hilite.style.height = elheight + 'px';
+            var highTimer = setInterval(function() {
+                if (!reverse) {
+                    l++;
+                    hilite.style.opacity = l / 100;
+                    if (l >= 100) {
+                        reverse = true;
+                    }
+                } else {
+                    l--;
+                    hilite.style.opacity = l / 100;
+                    if (l <= 0) {
+                        reverse = false;
+                        clearInterval(highTimer);
+                        that.elem.removeChild(hilite);
+                    }
+                }
+            }, this.options.length * 5);
+            break;
+        default:
+            break;
+    }
+};
 (function() {
     var tooltips = document.getElementsByClassName('tooltip');
     if (tooltips.length > -1) {
