@@ -1250,9 +1250,17 @@ CFAutoComplete.prototype.getList = function(id) {
 };
 var CFEffect = function(id, options) {
     this.elem = document.getElementById(id);
+    var presetValues = {
+        length: 3
+    }
     this.options = {
         length: options.length
     };
+    for (var opt in this.options) {
+        if (this.options[opt] === undefined) {
+            this.options[opt] = presetValues[opt];
+        }
+    }
 };
 CFEffect.prototype.addEffect = function(type) {
     var that = this;
