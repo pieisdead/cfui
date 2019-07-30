@@ -1,5 +1,3 @@
-// CFUI v1.0 \\
-// CF-JS Accordion 2.1 \\
 var CFAccordion = function(elem, mode) {
 	"use strict";
 	this.el = document.getElementById(elem);
@@ -1262,41 +1260,109 @@ var CFEffect = function(id, options) {
         }
     }
 };
-CFEffect.prototype.addEffect = function(type) {
+CFEffect.prototype.addEffect = function(effect, type) {
     var that = this;
-    switch (type) {
+    switch (effect) {
         case 'fade':
-            this.elem.style.opacity = 0;
-            var i = 0;
-            var fadeTimer = setInterval(function() {
-                i++;
-                that.elem.style.opacity = i / 100;
-                if (i >= 100) {
-                    clearInterval(fadeTimer);
-                }
-            }, that.options.length * 10);
+            if (type === 'show') {
+                this.elem.style.opacity = 0;
+                var i = 0;
+                var fadeTimer = setInterval(function() {
+                    i++;
+                    that.elem.style.opacity = i / 100;
+                    if (i >= 100) {
+                        clearInterval(fadeTimer);
+                        if (that.options.callback !== null) {
+                            if (that.options.callback === 'reset') {
+                                that.resetElem();
+                            }
+                        }
+                    }
+                }, that.options.length * 10);
+            } else {
+                this.elem.style.opacity = 1;
+                var ia = 100;
+                var fadeTimera = setInterval(function() {
+                    ia--;
+                    that.elem.style.opacity = ia / 100;
+                    if (ia <= 0) {
+                        clearInterval(fadeTimera);
+                        if (that.options.callback !== null) {
+                            if (that.options.callback === 'reset') {
+                                that.resetElem();
+                            }
+                        }
+                    }
+                }, that.options.length * 10);
+            }
             break;
         case 'grow':
-            this.elem.style.transform = 'scale(0)';
-            var j = 0;
-            var growTimer = setInterval(function() {
-                j++;
-                that.elem.style.transform = 'scale(' + (j / 100) + ')';
-                if (j >= 100) {
-                    clearInterval(growTimer);
-                }
-            }, that.options.length * 10);
+            if (type === 'show') {
+                this.elem.style.transform = 'scale(0)';
+                var j = 0;
+                var growTimer = setInterval(function() {
+                    j++;
+                    that.elem.style.transform = 'scale(' + (j / 100) + ')';
+                    if (j >= 100) {
+                        clearInterval(growTimer);
+                        if (that.options.callback !== null) {
+                            if (that.options.callback === 'reset') {
+                                that.resetElem();
+                            }
+                        }
+                    }
+                }, that.options.length * 10);
+            } else {
+                this.elem.style.transform = 'scale(1)';
+                var ja = 100;
+                var growTimera = setInterval(function() {
+                    ja--;
+                    that.elem.style.transform = 'scale(' + (ja / 100) + ')';
+                    if (ja <= 0) {
+                        clearInterval(growTimera);
+                        if (that.options.callback !== null) {
+                            if (that.options.callback === 'reset') {
+                                that.resetElem();
+                            }
+                        }
+                    }
+                }, that.options.length * 10);
+            }
             break;
         case 'spin':
-            var k = 0;
-            var spinTimer = setInterval(function() {
-                k++;
-                var deg = k / 100 * 360;
-                that.elem.style.transform = 'rotate(' + deg + 'deg)';
-                if (k >= 100) {
-                    clearInterval(spinTimer);
-                }
-            }, that.options.length * 10);
+            if (type === 'show') {
+                var k = 0;
+                this.elem.style.transform = 'scale(0)';
+                var spinTimer = setInterval(function() {
+                    k++;
+                    var deg = k / 100 * 360;
+                    that.elem.style.transform = 'scale(' + (k / 100) + ') rotate(' + deg + 'deg)';
+                    if (k >= 100) {
+                        clearInterval(spinTimer);
+                        if (that.options.callback !== null) {
+                            if (that.options.callback === 'reset') {
+                                that.resetElem();
+                            }
+                        }
+                    }
+                }, that.options.length * 10);
+            } else {
+                var ka = 100;
+                this.elem.style.transform = 'scale(1)';
+                var spinTimera = setInterval(function() {
+                    ka--;
+                    var deg = ka / 100 * 360;
+                    that.elem.style.transform = 'scale(' + (ka / 100) + ') rotate(' + deg + 'deg)';
+                    if (ka <= 0) {
+                        clearInterval(spinTimera);
+                        if (that.options.callback !== null) {
+                            if (that.options.callback === 'reset') {
+                                that.resetElem();
+                            }
+                        }
+                    }
+                }, that.options.length * 10);
+            }
             break;
         case 'highlite':
             var l = 0;
@@ -1327,9 +1393,85 @@ CFEffect.prototype.addEffect = function(type) {
                 }
             }, this.options.length * 5);
             break;
-        default:
+        case 'rollup':
+            if (type === 'hide') {
+                var m = 100;
+                var elHeight = this.elem.offsetHeight;
+                var hFrac = elHeight / 100;
+                var rollTimer = setInterval(function() {
+                    m--;
+                    that.elem.style.height = m * hFrac + 'px';
+                    if (m <= 0) {
+                        clearInterval(rollTimer);
+                        if (that.options.callback !== null) {
+                            if (that.options.callback === 'reset') {
+                                that.resetElem();
+                            }
+                        }
+                    }
+                }, this.options.length * 10);
+            } else {
+                var ma = 0;
+                var elFrac = this.elHeight / 100;
+                var rollTimera = setInterval(function() {
+                    ma++;
+                    that.elem.style.height = ma * elFrac + 'px';
+                    if (ma >= 100) {
+                        clearInterval(rollTimera);
+                        if (that.options.callback !== null) {
+                            if (that.options.callback === 'reset') {
+                                that.resetElem();
+                            }
+                        }
+                    }
+                }, this.options.length * 10);
+            }
+            break;
+        case 'exit':
+            var wrapper = this.elem.parentNode;
+            wrapper.style.overflow = 'hidden';
+            if (type === 'hide') {
+                var n = 0;
+                var fWidth = this.elem.offsetWidth;
+                var ffrac = fWidth / 100;
+                var exitTimer = setInterval(function() {
+                    n++;
+                    that.elem.style.left = -(n * ffrac) + 'px';
+                    if (n >= 100) {
+                        clearInterval(exitTimer);
+                        if (that.options.callback !== null) {
+                            if (that.options.callback === 'reset') {
+                                that.resetElem();
+                            }
+                        }
+                    }
+                }, this.options.length * 10);
+            } else {
+                var na = 100;
+                var fStart = -this.elem.offsetWidth;
+                var efrac = this.elem.offsetWidth / 100;
+                this.elem.style.left = fStart + 'px';
+                var exitTimera = setInterval(function() {
+                    na--;
+                    that.elem.style.left = -(na * efrac) + 'px';
+                    if (na <= 0) {
+                        clearInterval(exitTimera);
+                        if (that.options.callback !== null) {
+                            if (that.options.callback === 'reset') {
+                                that.resetElem();
+                            }
+                        }
+                    }
+                }, this.options.length * 10);
+            }
             break;
     }
+};
+CFEffect.prototype.resetElem = function() {
+    this.elem.style.opacity = 1;
+    this.elem.style.height = this.elHeight + 'px';
+    this.elem.style.transform = 'scale(1) rotate(0deg)';
+    this.elem.style.left = '0px';
 };
 (function() {
     var tooltips = document.getElementsByClassName('tooltip');
