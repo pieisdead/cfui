@@ -1155,7 +1155,8 @@ var CFAutoComplete = function(id, options) {
 CFAutoComplete.prototype.init = function() {
     var that = this;
     this.elem = document.getElementById(this.id);
-    var inputPosition = this.elem.getBoundingClientRect();
+    var inputPositionY = this.elem.offsetTop;
+    var inputPositionX = this.elem.offsetLeft;
     var inputHeight = this.elem.offsetHeight;
     this.elem.addEventListener('input', function() {
         var a, b, i, val = this.value;
@@ -1167,8 +1168,8 @@ CFAutoComplete.prototype.init = function() {
         a = document.createElement('div');
         a.setAttribute('id', this.id + '_list');
         a.setAttribute('class', 'cf-autocomplete-list');
-        a.style.top = Math.floor(inputPosition.y + inputHeight) + 'px';
-        a.style.left = Math.floor(inputPosition.x) + 'px';
+        a.style.top = Math.floor(inputPositionY + inputHeight) + 'px';
+        a.style.left = Math.floor(inputPositionX) + 'px';
         this.parentNode.appendChild(a);
         for (i = 0; i < that.options.source.length; i++) {
             if (that.options.source[i].substr(0, val.length).toUpperCase() === val.toUpperCase()) {
