@@ -1250,16 +1250,20 @@ CFAutoComplete.prototype.getList = function(id) {
 var CFEffect = function(id, options) {
     this.elem = document.getElementById(id);
     var presetValues = {
-        length: 3
-    }
+        length: 3,
+        callback: null
+    };
     this.options = {
-        length: options.length
+        length: options.length,
+        callback: options.callback
     };
     for (var opt in this.options) {
         if (this.options[opt] === undefined) {
             this.options[opt] = presetValues[opt];
         }
     }
+    this.elWidth = this.elem.offsetWidth;
+    this.elHeight = this.elem.offsetHeight;
 };
 CFEffect.prototype.addEffect = function(effect, type) {
     var that = this;
@@ -1274,9 +1278,7 @@ CFEffect.prototype.addEffect = function(effect, type) {
                     if (i >= 100) {
                         clearInterval(fadeTimer);
                         if (that.options.callback !== null) {
-                            if (that.options.callback === 'reset') {
-                                that.resetElem();
-                            }
+                            that.options.callback();
                         }
                     }
                 }, that.options.length * 10);
@@ -1289,9 +1291,7 @@ CFEffect.prototype.addEffect = function(effect, type) {
                     if (ia <= 0) {
                         clearInterval(fadeTimera);
                         if (that.options.callback !== null) {
-                            if (that.options.callback === 'reset') {
-                                that.resetElem();
-                            }
+                            that.options.callback();
                         }
                     }
                 }, that.options.length * 10);
@@ -1307,9 +1307,7 @@ CFEffect.prototype.addEffect = function(effect, type) {
                     if (j >= 100) {
                         clearInterval(growTimer);
                         if (that.options.callback !== null) {
-                            if (that.options.callback === 'reset') {
-                                that.resetElem();
-                            }
+                            that.options.callback();
                         }
                     }
                 }, that.options.length * 10);
@@ -1322,9 +1320,7 @@ CFEffect.prototype.addEffect = function(effect, type) {
                     if (ja <= 0) {
                         clearInterval(growTimera);
                         if (that.options.callback !== null) {
-                            if (that.options.callback === 'reset') {
-                                that.resetElem();
-                            }
+                            that.options.callback();
                         }
                     }
                 }, that.options.length * 10);
@@ -1341,9 +1337,7 @@ CFEffect.prototype.addEffect = function(effect, type) {
                     if (k >= 100) {
                         clearInterval(spinTimer);
                         if (that.options.callback !== null) {
-                            if (that.options.callback === 'reset') {
-                                that.resetElem();
-                            }
+                            that.options.callback();
                         }
                     }
                 }, that.options.length * 10);
@@ -1357,9 +1351,7 @@ CFEffect.prototype.addEffect = function(effect, type) {
                     if (ka <= 0) {
                         clearInterval(spinTimera);
                         if (that.options.callback !== null) {
-                            if (that.options.callback === 'reset') {
-                                that.resetElem();
-                            }
+                            that.options.callback();
                         }
                     }
                 }, that.options.length * 10);
@@ -1405,9 +1397,7 @@ CFEffect.prototype.addEffect = function(effect, type) {
                     if (m <= 0) {
                         clearInterval(rollTimer);
                         if (that.options.callback !== null) {
-                            if (that.options.callback === 'reset') {
-                                that.resetElem();
-                            }
+                            that.options.callback();
                         }
                     }
                 }, this.options.length * 10);
@@ -1420,9 +1410,7 @@ CFEffect.prototype.addEffect = function(effect, type) {
                     if (ma >= 100) {
                         clearInterval(rollTimera);
                         if (that.options.callback !== null) {
-                            if (that.options.callback === 'reset') {
-                                that.resetElem();
-                            }
+                            that.options.callback();
                         }
                     }
                 }, this.options.length * 10);
@@ -1441,9 +1429,7 @@ CFEffect.prototype.addEffect = function(effect, type) {
                     if (n >= 100) {
                         clearInterval(exitTimer);
                         if (that.options.callback !== null) {
-                            if (that.options.callback === 'reset') {
-                                that.resetElem();
-                            }
+                            that.options.callback();
                         }
                     }
                 }, this.options.length * 10);
@@ -1458,9 +1444,7 @@ CFEffect.prototype.addEffect = function(effect, type) {
                     if (na <= 0) {
                         clearInterval(exitTimera);
                         if (that.options.callback !== null) {
-                            if (that.options.callback === 'reset') {
-                                that.resetElem();
-                            }
+                            that.options.callback();
                         }
                     }
                 }, this.options.length * 10);
@@ -1473,6 +1457,13 @@ CFEffect.prototype.resetElem = function() {
     this.elem.style.height = this.elHeight + 'px';
     this.elem.style.transform = 'scale(1) rotate(0deg)';
     this.elem.style.left = '0px';
+};
+CFEffect.prototype.removeElem = function() {
+    document.removeChild(this.elem);
+};
+CFEffect.prototype.reverseEffect = function(effect, type) {
+    this.options.callback = null;
+    this.addEffect(effect, type);
 };
 (function() {
     var tooltips = document.getElementsByClassName('tooltip');
