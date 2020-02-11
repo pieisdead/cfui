@@ -8,4 +8,3 @@ Accordions, Autocomplete fields, Modal dialogs, Slideshows, Tabs and Tooltips.
 # Effects
 Fade, grow, spin, highlite, rollup, exit
 
-More widgets and functions are in development.
