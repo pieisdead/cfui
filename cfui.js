@@ -1,3 +1,5 @@
+// CFUI v1.0 \\
+// CF-JS Accordion 2.1 \\
 var CFAccordion = function(elem, mode) {
 	"use strict";
 	this.el = document.getElementById(elem);
@@ -1135,6 +1137,7 @@ CFTooltip.prototype.init = function() {
         }
     }, false);
 };
+// AutoComplete \\
 var CFAutoComplete = function(id, options) {
     this.elem = null;
     this.currentFocus = 0;
@@ -1215,7 +1218,6 @@ CFAutoComplete.prototype.addActive = function(x) {
         return(false);
     }
     this.removeActive(x);
-    console.log(x[this.currentFocus]);
     if (this.currentFocus >= x.length) {
         this.currentFocus = 0;
     }
@@ -1247,6 +1249,7 @@ CFAutoComplete.prototype.getList = function(id) {
     }
     this.options.source = list;
 };
+// Effects
 var CFEffect = function(id, options) {
     this.elem = document.getElementById(id);
     var presetValues = {
@@ -1489,3 +1492,147 @@ CFEffect.prototype.reverseEffect = function(effect, type) {
         }
     }
 })();
+var CFMenu = function(id, options) {
+    "use strict";
+    this.id = id;
+    this.defaultValues = {
+        handler: 'mouseover',
+        anim: 'collapse'
+    }
+    this.options = {
+        handler: options.handler,
+        anim: options.anim
+    }
+    for (var opt in this.options) {
+        if (this.options[opt] === undefined) {
+            this.options[opt] = this.defaultValues[opt];
+        }
+    }    
+    this.elem = null;
+    this.menuHeights = [];
+    this.init();
+};
+CFMenu.prototype.init = function() {
+    "use strict";
+    var that = this;
+    this.elem = document.getElementById(this.id);
+    var menu = this.elem.getElementsByClassName('menu')[0];
+    var alllinks = menu.getElementsByTagName('li');
+    var links = [];
+    for (var a = 0; a < alllinks.length; a++) {
+        if (alllinks[a].parentNode === menu) {
+            links.push(alllinks[a]);
+        }
+    }
+    for (var link = 0; link < links.length; link++) {
+        var submenu = links[link].getElementsByClassName('submenu')[0];
+        if (submenu !== undefined) {
+            var menuheight = submenu.offsetHeight;
+            that.menuHeights.push(menuheight);
+            if (that.options.anim === 'collapse') {
+                submenu.style.height = '0px';
+            } else if (that.options.anim === 'fade') {
+                submenu.style.display = 'none';
+                submenu.style.opacity = 0;
+            } else {
+                submenu.style.display = 'none';
+            }
+            this.addEvents(links[link], link);
+        } else {
+            that.menuHeights.push(0);
+        }
+    }
+};
+CFMenu.prototype.addEvents = function(el, l) {
+    var that = this;
+    var headLink = el.getElementsByTagName('a')[0];
+    var subMenu = el.getElementsByClassName('submenu')[0];
+    var timer = null;
+    if (this.options.handler === 'mouseover') {
+        headLink.addEventListener('mouseover', function() {
+            if (that.options.anim === 'collapse') {
+                subMenu.style.height = that.menuHeights[l] + 'px';
+            } else if (that.options.anim === 'fade') {
+                subMenu.style.display = 'block';
+                var delay = setInterval(function() {
+                    subMenu.style.opacity = 1;
+                    clearInterval(delay);
+                },10);
+            } else {
+                subMenu.style.display = 'block';
+            }
+            if (timer !== null) {
+                clearInterval(timer);
+            }
+        }, false);
+        headLink.addEventListener('mouseout', function() {
+            timer = setInterval(function() {
+                if (that.options.anim === 'collapse') {
+                    subMenu.style.height = '0px';
+                } else if (that.options.anim === 'fade') {
+                    subMenu.style.opacity = 0;
+                    var delay = setInterval(function() {
+                        subMenu.style.display = 'none';
+                        clearInterval(delay);
+                    }, 600);
+                } else {
+                    subMenu.style.display = 'none';
+                }
+                clearInterval(timer);
+            }, 500);
+        }, false);
+        subMenu.addEventListener('mouseover', function() {
+            if (timer !== null) {
+                clearInterval(timer);
+            }
+        }, false);
+        subMenu.addEventListener('mouseout', function() {
+            timer = setInterval(function() {
+                if (that.options.anim === 'collapse') {
+                    subMenu.style.height = '0px';
+                } else if (that.options.anim === 'fade') {
+                    subMenu.style.opacity = 0;
+                    var delay = setInterval(function() {
+                        subMenu.style.display = 'none';
+                        clearInterval(delay);
+                    }, 600);
+                } else {
+                    subMenu.style.display = 'none';
+                }
+                clearInterval(timer);
+            }, 500);
+           
+        }, false);
+    } else {
+        headLink.addEventListener('click', function(event) {
+            if (this.className.indexOf('active') < 0) {
+                if (that.options.anim === 'collapse') {
+                    subMenu.style.height = that.menuHeights[l] + 'px';
+                } else if (that.options.anim === 'fade') {
+                    subMenu.style.display = 'block';
+                    var delay = setInterval(function() {
+                        subMenu.style.opacity = 1;
+                        clearInterval(delay);
+                    }, 10);
+                } else {
+                    subMenu.style.display = 'block';
+                }
+                this.className = 'active';
+            } else {
+                if (that.options.anim === 'collapse') {
+                    subMenu.style.height = '0px';
+                } else if (that.options.anim === 'fade') {
+                    subMenu.style.opacity = 0;
+                    var delayOut = setInterval(function() {
+                        subMenu.style.display = 'none';
+                        clearInterval(delayOut);
+                    }, 600);
+                } else {
+                    subMenu.style.display = 'none';
+                }
+                this.className = '';
+            }
+            event.preventDefault();
+        }, false);
+    }
+};

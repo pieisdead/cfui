@@ -416,3 +416,51 @@
     z-index: -1;
     display: block;
 }
+.cf-menu {
+    display: block;
+    position: relative;
+}
+.cf-menu.horizontal > ul {
+    list-style: none;
+    position: relative;
+    padding: 0;
+}
+.cf-menu.horizontal > ul > li {
+    display: inline-block;
+    margin: 0px;
+    vertical-align: top;
+    position: relative;
+    padding: 0px;
+}
+.cf-menu.horizontal > ul > li > ul {
+    position: absolute;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 150px;
+    display: block;
+    overflow: hidden;
+    transition: height 0.6s ease-out, opacity 0.6s ease-out;
+    background: #EDEDED;
+}
+.cf-menu.horizontal > ul > li > ul > li {
+    width: auto;
+}
+.cf-menu.vertical > ul {
+    list-style: none;
+    position: relative;
+    padding: 0px;
+}
+.cf-menu.vertical > ul > li {
+    display: block;
+    position: relative;
+}
+.cf-menu.vertical > ul > li > ul {
+    position: relative;
+    list-style: none;
+    padding: 0 0 0 10px;
+    display: block;
+    width: 200px;
+    transition: height 0.6s ease-out, opacity 0.6s ease-out;
+    overflow: hidden;
+}
