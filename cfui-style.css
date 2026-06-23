@@ -153,11 +153,7 @@
 .cf-tab-header > div.active {
     background: #666;
 }
-.cf-tab-header > div > h5 {
-    font-size: 16px;
-    color: #333;
-    margin: 0;
-    line-height: 1.1em;
+.cf-tab-header > div > * {
     pointer-events: none;
 }
 .cf-tab-header > div.active > h5 {

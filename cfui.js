@@ -1,4 +1,4 @@
-// CFUI v1.0 \\
+// CFUI v1.2.1 \\
 // CF-JS Accordion 2.1 \\
 var CFAccordion = function(elem, mode) {
 	"use strict";
@@ -486,7 +486,7 @@ CFModal.prototype.addListener = function(eventTarget, eventType, eventHandler) {
 		eventTarget["on" + eventType] = eventHandler;
 	}
 };
-var cfModal = new CFModal();
+//var cfModal = new CFModal();
 // CF TABS v1.0 \\
 var CFTabs = function(id, options) {
     "use strict";

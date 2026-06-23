@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="cfui-style.css" rel="stylesheet" type="text/css">
+        <script src="cfui.js"></script>
+    </head>
+    <body>
+        <h2>CF Accordion</h2>
+        <div class="cf-accordion" id="myAccordion">
+            <h3>My first item</h3>
+            <div>
+                <p>This is the content</p>
+            </div>
+            <h3>My first item 3</h3>
+            <div>
+                <p>This is the content 2</p>
+            </div>
+            <h3>my 3</h3>
+            <div>
+                <p>This is the content</p>
+            </div>
+        </div>
+        <h2>CF Tabs</h2>
+        <div class="cf-tabs" id="myTabs">
+            <div class="cf-tab-header">
+                <div><h4>Tab 1</h4></div>
+                <div><h4>Tab 2</h4></div>
+            </div>
+            <div class="cf-tab-content">
+                <div>
+                    <p>This is content of 1</p>
+                </div>
+                <div>
+                    <p>This is content of 2</p>
+                </div>
+            </div>
+        </div>
+
+       <!--<div id="editor">
+            Hello
+        </div>-->
+        <!--<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>-->
+        <script>
+            var accordion = new CFAccordion('myAccordion', 'dynamic');
+            accordion.initialOpen(0);
+            //CKEDITOR.replace( 'editor' );
+            var tabs = new CFTabs('myTabs', {});
+        </script>
+    </body>
+</html>
