@@ -3,48 +3,97 @@
     <head>
         <link href="cfui-style.css" rel="stylesheet" type="text/css">
         <script src="cfui.min.js"></script>
+        <style>
+            .wrapper {
+                width: 90vw;
+                margin: auto;
+                display: block;
+                position: relative;
+                font-family: sans-serif;
+            }
+        </style>
     </head>
     <body>
-        <h2>CF Accordion</h2>
-        <div class="cf-accordion" id="myAccordion">
-            <h3>My first item</h3>
-            <div>
-                <p>This is the content</p>
-            </div>
-            <h3>My first item 3</h3>
-            <div>
-                <p>This is the content 2</p>
-            </div>
-            <h3>my 3</h3>
-            <div>
-                <p>This is the content</p>
-            </div>
-        </div>
-        <h2>CF Tabs</h2>
-        <div class="cf-tabs" id="myTabs">
-            <div class="cf-tab-header">
-                <div><h4>Tab 1</h4></div>
-                <div><h4>Tab 2</h4></div>
-            </div>
-            <div class="cf-tab-content">
+        <div class="wrapper">
+            <h1>CFUI.JS v1.2.1</h1>
+            <p><a href="index.html">Widgets</a> | 
+            <a href="effects.html">Effects</a></p>
+            <h2>CF Accordion</h2>
+            <div class="cf-accordion" id="myAccordion">
+                <h3>My first item</h3>
                 <div>
-                    <p>This is content of 1</p>
+                    <p>This is the content</p>
                 </div>
+                <h3>My first item 3</h3>
                 <div>
-                    <p>This is content of 2</p>
+                    <p>This is the content 2</p>
+                </div>
+                <h3>my 3</h3>
+                <div>
+                    <p>This is the content</p>
                 </div>
             </div>
+            <h2>CF Tabs</h2>
+            <div class="cf-tabs" id="myTabs">
+                <div class="cf-tab-header">
+                    <div class="active"><h4>Tab 1</h4></div>
+                    <div><h4>Tab 2</h4></div>
+                </div>
+                <div class="cf-tab-content">
+                    <div class="active">
+                        <p>This is content of 1</p>
+                    </div>
+                    <div>
+                        <p>This is content of 2</p>
+                    </div>
+                </div>
+            </div>
+            <h2>Slideshow</h2>
+            <div class="cf-slideshow" id="mySlideshow">
+                <section><h1>Slide One</h1></section>
+                <section><h1>Slide Two</h1></section>
+            </div>
+            <h2>Tooltips</h2>
+            <a class="tooltip-link">Hover
+                <div id="myTooltip1" class="tooltip">
+                    This is the content
+                </div>
+            </a>
+            <h2>Menus</h2>
+            <div class="cf-menu horizontal" id="myMenu">
+                <ul class="menu">
+                    <li><a>My Link</a>
+                        <ul class="submenu">
+                            <li>Sub item</li>
+                        </ul>
+                    </li>
+                    <li><a>Another link</a></li>
+                </ul>
+            </div>
+            <h2>Autocomplete</h2>
+            <input type="text" class="cf-autocomplete" id="myAutocomplete">
+            <h2>Modal window</h2>
+            <div class="" id="modalTarget">IPen Model</div>
         </div>
-
-       <!--<div id="editor">
-            Hello
-        </div>-->
-        <!--<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>-->
+        
+        <div class="cf-modal" id="myModal1">
+            <div class="modal-header">Heaer</div>
+            
+            <h1>This is the modal window</h1>
+        </div>
+    
         <script>
             var accordion = new CFAccordion('myAccordion', 'dynamic');
             accordion.initialOpen(0);
-            //CKEDITOR.replace( 'editor' );
             var tabs = new CFTabs('myTabs', {});
+            var slideshow = new CFSlideshow('mySlideshow', {});
+            var tooltip = new CFTooltip('myTooltip1', {});
+            var autocomplete = new CFAutoComplete('myAutocomplete', {});
+            var modal = new CFModal();
+            var menu = new CFMenu('myMenu', {});
+            document.getElementById('modalTarget').addEventListener('click', () => {
+                modal.openWindow('myModal1', '500px', '200px', 'fade', null);
+            })
         </script>
     </body>
 </html>

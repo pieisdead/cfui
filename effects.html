@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="cfui-style.css" rel="stylesheet" type="text/css">
+        <script src="cfui.min.js"></script>
+        <style>
+            .wrapper {
+                width: 90vw;
+                margin: auto;
+                display: block;
+                position: relative;
+                font-family: sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <h1>CFUI.JS v1.2.1</h1>
+            <p><a href="index.html">Widgets</a> | 
+            <a href="effects.html">Effects</a></p>
+            <h2>Effects</h2>
+            <h3>Fade</h3>
+            <div id="fadein">
+                <p>this is content</p>
+            </div>
+        </div>
+
+        <script>
+          var fx = new CFEffect('fadein', {
+            length: 4,
+            callback: null
+          });
+          fx.addEffect('fade', 'show');
+        </script>
+    </body>
+</html>
