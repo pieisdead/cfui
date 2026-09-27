@@ -923,7 +923,7 @@ CFSlideshow.prototype.init = function() {
                 that.currentSlide = 0;
             }
             that.changeSlide(that.currentSlide);
-            if (this.options.showThumbs) {
+            if (that.options.showThumbs) {
                 that.changeThumb(that.elem, that.currentSlide);
             }
         }, that.options.delay * 1000);
